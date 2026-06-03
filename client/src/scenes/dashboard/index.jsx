@@ -26,6 +26,30 @@ const Dashboard = () => {
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
   const { data, isLoading } = useGetDashboardQuery();
 
+  // Mock data for dashboard
+  const mockData = {
+    totalCustomers: 1250,
+    todayStats: {
+      totalSales: 45600
+    },
+    thisMonthStats: {
+      totalSales: 345000
+    },
+    yearlySalesTotal: 4200000,
+    transactions: [
+      { _id: "1", userId: "user_001", createdAt: "2024-01-15", products: [{ name: "Solar Panel A" }, { name: "Inverter" }], cost: 25000 },
+      { _id: "2", userId: "user_002", createdAt: "2024-01-14", products: [{ name: "Solar Panel B" }], cost: 18000 },
+      { _id: "3", userId: "user_003", createdAt: "2024-01-13", products: [{ name: "Battery" }, { name: "Inverter" }], cost: 32000 },
+      { _id: "4", userId: "user_004", createdAt: "2024-01-12", products: [{ name: "Solar Panel A" }, { name: "Solar Panel B" }], cost: 45000 },
+      { _id: "5", userId: "user_005", createdAt: "2024-01-11", products: [{ name: "Complete System" }], cost: 85000 },
+      { _id: "6", userId: "user_006", createdAt: "2024-01-10", products: [{ name: "Solar Panel A" }], cost: 15000 },
+      { _id: "7", userId: "user_007", createdAt: "2024-01-09", products: [{ name: "Inverter" }, { name: "Battery" }], cost: 28000 },
+      { _id: "8", userId: "user_008", createdAt: "2024-01-08", products: [{ name: "Solar Panel C" }], cost: 22000 },
+    ]
+  };
+
+  const displayData = data || mockData;
+
   const columns = [
     {
       field: "_id",
@@ -91,7 +115,7 @@ const Dashboard = () => {
         {/* ROW 1 */}
         <StatBox
           title="Total Customers"
-          value={data && data.totalCustomers}
+          value={displayData && displayData.totalCustomers}
           increase="+14%"
           description="Since last month"
           icon={
@@ -102,7 +126,7 @@ const Dashboard = () => {
         />
         <StatBox
           title="Sales Today"
-          value={data && data.todayStats ? data.todayStats.totalSales : 0}
+          value={displayData && displayData.todayStats ? displayData.todayStats.totalSales : 0}
           increase="+21%"
           description="Since last month"
           icon={
@@ -122,7 +146,7 @@ const Dashboard = () => {
         </Box>
         <StatBox
           title="Monthly Sales"
-          value={data && data.thisMonthStats.totalSales}
+          value={displayData && displayData.thisMonthStats.totalSales}
           increase="+5%"
           description="Since last month"
           icon={
@@ -133,7 +157,7 @@ const Dashboard = () => {
         />
         <StatBox
           title="Yearly Sales"
-          value={data && data.yearlySalesTotal}
+          value={displayData && displayData.yearlySalesTotal}
           increase="+43%"
           description="Since last month"
           icon={
@@ -174,9 +198,9 @@ const Dashboard = () => {
           }}
         >
           <DataGrid
-            loading={isLoading || !data}
+            loading={isLoading || !displayData}
             getRowId={(row) => row._id}
-            rows={(data && data.transactions) || []}
+            rows={(displayData && displayData.transactions) || []}
             columns={columns}
           />
         </Box>
@@ -497,6 +521,363 @@ const Dashboard = () => {
                   }}
                 >
                   Teacher
+                </Box>
+              </Box>
+              <Box
+                component="tr"
+                sx={{
+                  display: "table-row",
+                                  }}
+              >
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Rahul Mehta
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  rahul.mehta@email.com
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Mumbai
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Software Engineer
+                </Box>
+              </Box>
+              <Box
+                component="tr"
+                sx={{
+                  display: "table-row",
+                                  }}
+              >
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Sneha Gupta
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  sneha.gupta@email.com
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Bangalore
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Doctor
+                </Box>
+              </Box>
+              <Box
+                component="tr"
+                sx={{
+                  display: "table-row",
+                                  }}
+              >
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Karthik Rajan
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  karthik.rajan@email.com
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Chennai
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Architect
+                </Box>
+              </Box>
+              <Box
+                component="tr"
+                sx={{
+                  display: "table-row",
+                                  }}
+              >
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Pooja Verma
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  pooja.verma@email.com
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Pune
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Financial Analyst
+                </Box>
+              </Box>
+              <Box
+                component="tr"
+                sx={{
+                  display: "table-row",
+                                  }}
+              >
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Arjun Kapoor
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  arjun.kapoor@email.com
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Hyderabad
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Project Manager
+                </Box>
+              </Box>
+              <Box
+                component="tr"
+                sx={{
+                  display: "table-row",
+                                  }}
+              >
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Kavita Reddy
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  kavita.reddy@email.com
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Lucknow
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Lawyer
+                </Box>
+              </Box>
+              <Box
+                component="tr"
+                sx={{
+                  display: "table-row",
+                                  }}
+              >
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Deepak Joshi
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  deepak.joshi@email.com
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Indore
+                </Box>
+                <Box
+                  component="td"
+                  sx={{
+                    display: "table-cell",
+                    padding: "0.75rem",
+                    color: theme.palette.grey[700],
+                    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+                  }}
+                >
+                  Consultant
                 </Box>
               </Box>
             </Box>

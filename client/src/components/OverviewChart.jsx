@@ -7,10 +7,30 @@ const OverviewChart = ({ isDashboard = false, view }) => {
   const theme = useTheme();
   const { data, isLoading } = useGetSalesQuery();
 
-  const [totalSalesLine, totalUnitsLine] = useMemo(() => {
-    if (!data) return [];
+  // Mock data for overview chart
+  const mockData = {
+    monthlyData: {
+      "January": { month: "January", totalSales: 45000, totalUnits: 120 },
+      "February": { month: "February", totalSales: 52000, totalUnits: 145 },
+      "March": { month: "March", totalSales: 48000, totalUnits: 130 },
+      "April": { month: "April", totalSales: 61000, totalUnits: 165 },
+      "May": { month: "May", totalSales: 55000, totalUnits: 150 },
+      "June": { month: "June", totalSales: 67000, totalUnits: 180 },
+      "July": { month: "July", totalSales: 72000, totalUnits: 195 },
+      "August": { month: "August", totalSales: 69000, totalUnits: 185 },
+      "September": { month: "September", totalSales: 58000, totalUnits: 160 },
+      "October": { month: "October", totalSales: 64000, totalUnits: 175 },
+      "November": { month: "November", totalSales: 71000, totalUnits: 190 },
+      "December": { month: "December", totalSales: 78000, totalUnits: 210 }
+    }
+  };
 
-    const { monthlyData } = data;
+  const displayData = data || mockData;
+
+  const [totalSalesLine, totalUnitsLine] = useMemo(() => {
+    if (!displayData) return [];
+
+    const { monthlyData } = displayData;
     const totalSalesLine = {
       id: "totalSales",
       color: theme.palette.secondary.main,
@@ -42,9 +62,9 @@ const OverviewChart = ({ isDashboard = false, view }) => {
     );
 
     return [[totalSalesLine], [totalUnitsLine]];
-  }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [displayData]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (!data || isLoading) return "Loading...";
+  if (!displayData || isLoading) return "Loading...";
 
   return (
     <ResponsiveLine

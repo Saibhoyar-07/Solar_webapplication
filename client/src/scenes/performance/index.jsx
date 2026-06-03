@@ -11,6 +11,22 @@ const Performance = () => {
   const userId = useSelector((state) => state.global.userId);
   const { data, isLoading } = useGetUserPerformanceQuery(userId);
 
+  // Mock data for performance
+  const mockPerformance = {
+    sales: [
+      { _id: "1", userId: "user_001", createdAt: "2024-01-15", products: [{ name: "Solar Panel A" }, { name: "Inverter" }], cost: 25000 },
+      { _id: "2", userId: "user_001", createdAt: "2024-01-14", products: [{ name: "Solar Panel B" }], cost: 18000 },
+      { _id: "3", userId: "user_001", createdAt: "2024-01-13", products: [{ name: "Battery" }, { name: "Inverter" }], cost: 32000 },
+      { _id: "4", userId: "user_001", createdAt: "2024-01-12", products: [{ name: "Solar Panel A" }, { name: "Solar Panel B" }], cost: 45000 },
+      { _id: "5", userId: "user_001", createdAt: "2024-01-11", products: [{ name: "Complete System" }], cost: 85000 },
+      { _id: "6", userId: "user_001", createdAt: "2024-01-10", products: [{ name: "Solar Panel A" }], cost: 15000 },
+      { _id: "7", userId: "user_001", createdAt: "2024-01-09", products: [{ name: "Inverter" }, { name: "Battery" }], cost: 28000 },
+      { _id: "8", userId: "user_001", createdAt: "2024-01-08", products: [{ name: "Solar Panel C" }], cost: 22000 },
+    ]
+  };
+
+  const displayData = data || mockPerformance;
+
   const columns = [
     {
       field: "_id",
@@ -77,9 +93,9 @@ const Performance = () => {
         }}
       >
         <DataGrid
-          loading={isLoading || !data}
+          loading={isLoading || !displayData}
           getRowId={(row) => row._id}
-          rows={(data && data.sales) || []}
+          rows={(displayData && displayData.sales) || []}
           columns={columns}
           components={{
             ColumnMenu: CustomColumnMenu,

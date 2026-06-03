@@ -7,7 +7,20 @@ const BreakdownChart = ({ isDashboard = false }) => {
   const { data, isLoading } = useGetSalesQuery();
   const theme = useTheme();
 
-  if (!data || isLoading) return "Loading...";
+  // Mock data for sales by category
+  const mockData = {
+    salesByCategory: {
+      "Solar Panels": 450000,
+      "Inverters": 275000,
+      "Batteries": 320000,
+      "Kits": 540000
+    },
+    yearlySalesTotal: 1585000
+  };
+
+  const displayData = data || mockData;
+
+  if (!displayData || isLoading) return "Loading...";
 
   const colors = [
     theme.palette.secondary[500],
@@ -15,7 +28,7 @@ const BreakdownChart = ({ isDashboard = false }) => {
     theme.palette.secondary[300],
     theme.palette.secondary[500],
   ];
-  const formattedData = Object.entries(data.salesByCategory).map(
+  const formattedData = Object.entries(displayData.salesByCategory).map(
     ([category, sales], i) => ({
       id: category,
       label: category,
@@ -130,7 +143,7 @@ const BreakdownChart = ({ isDashboard = false }) => {
         }}
       >
         <Typography variant="h6">
-          {!isDashboard && "Total:"} ${data.yearlySalesTotal}
+          {!isDashboard && "Total:"} ${displayData.yearlySalesTotal}
         </Typography>
       </Box>
     </Box>

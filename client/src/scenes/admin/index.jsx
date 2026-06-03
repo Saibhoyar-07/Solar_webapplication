@@ -9,6 +9,57 @@ const Admin = () => {
   const theme = useTheme();
   const { data, isLoading } = useGetAdminsQuery();
 
+  // Mock data for admins
+  const mockAdmins = [
+    {
+      _id: "1",
+      name: "John Smith",
+      email: "john.smith@solar.com",
+      phoneNumber: "1234567890",
+      country: "USA",
+      occupation: "System Administrator",
+      role: "Admin"
+    },
+    {
+      _id: "2",
+      name: "Sarah Johnson",
+      email: "sarah.johnson@solar.com",
+      phoneNumber: "2345678901",
+      country: "USA",
+      occupation: "Database Administrator",
+      role: "Admin"
+    },
+    {
+      _id: "3",
+      name: "Michael Brown",
+      email: "michael.brown@solar.com",
+      phoneNumber: "3456789012",
+      country: "UK",
+      occupation: "Network Administrator",
+      role: "Super Admin"
+    },
+    {
+      _id: "4",
+      name: "Emily Davis",
+      email: "emily.davis@solar.com",
+      phoneNumber: "4567890123",
+      country: "Canada",
+      occupation: "Security Administrator",
+      role: "Admin"
+    },
+    {
+      _id: "5",
+      name: "David Wilson",
+      email: "david.wilson@solar.com",
+      phoneNumber: "5678901234",
+      country: "Australia",
+      occupation: "Cloud Administrator",
+      role: "Admin"
+    }
+  ];
+
+  const displayData = data || mockAdmins;
+
   const columns = [
     {
       field: "_id",
@@ -82,9 +133,9 @@ const Admin = () => {
         }}
       >
         <DataGrid
-          loading={isLoading || !data}
+          loading={isLoading || !displayData}
           getRowId={(row) => row._id}
-          rows={data || []}
+          rows={displayData || []}
           columns={columns}
           components={{
             ColumnMenu: CustomColumnMenu,
