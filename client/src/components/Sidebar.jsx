@@ -21,7 +21,7 @@ import {
   Groups2Outlined,
   ReceiptLongOutlined,
   PointOfSaleOutlined,
-    CalendarMonthOutlined,
+  CalendarMonthOutlined,
   AdminPanelSettingsOutlined,
   TrendingUpOutlined,
   PieChartOutlined,
