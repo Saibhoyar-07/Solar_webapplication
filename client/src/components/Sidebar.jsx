@@ -20,7 +20,6 @@ import {
   ShoppingCartOutlined,
   Groups2Outlined,
   ReceiptLongOutlined,
-  PublicOutlined,
   PointOfSaleOutlined,
     CalendarMonthOutlined,
   AdminPanelSettingsOutlined,
